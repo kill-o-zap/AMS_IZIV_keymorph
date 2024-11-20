@@ -12,7 +12,7 @@ from keymorph.viz_tools import (
     imshow_registration_3d,
 )
 
-from brainmorph.scripts.script_utils import aggregate_dicts
+from scripts.script_utils import aggregate_dicts
 
 
 def run_pretrain(loader, ref_subject, keymorph_model, optimizer, args):

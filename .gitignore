@@ -1,0 +1,6 @@
+/.venv
+/weights
+/keymorph.egg-info
+/.vscode
+/output
+/register_output
