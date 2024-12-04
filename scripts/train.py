@@ -50,7 +50,8 @@ def run_train(train_loader, registration_model, optimizer, args):
             print("Skipping large image")
             continue
         if args.seg_available:
-            seg_f, seg_m = fixed["seg"][tio.DATA], moving["seg"][tio.DATA]
+            print(fixed.keys())
+            seg_f, seg_m = fixed["mask"][tio.DATA], moving["mask"][tio.DATA]
             # One-hot encode segmentations
             if args.max_train_seg_channels is not None:
                 seg_f, seg_m = one_hot_subsampled_pair(
