@@ -10,9 +10,9 @@ python scripts/register.py    --num_keypoints 256    --num_levels_for_unet 4    
 
 python scripts/run.py    --run_mode train    --num_keypoints 128    --loss_fn mse    --transform_type affine    --train_dataset ixi    --data_path ./data/centered_IXI    --max_random_affine_augment_params (0.2, 0.2, 3.1416, 0.1)    --load_path ./weights/numkey128_pretrain.2500.h5 --epochs 1
 
-python scripts/run.py    --run_mode pretrain    --num_keypoints 128    --loss_mse   --transform_type tps_0    --max_random_affine_augment_params (0.2, 0.2, 3.1416, 0.1)    --affine_slope 1000    --data_path ./data/centered_IXI --train_dataset ixi --epochs 1 --visualize
+python scripts/run.py    --run_mode pretrain    --num_keypoints 128    --loss_fn mse   --transform_type tps_0    --max_random_affine_augment_params (0.2, 0.2, 3.1416, 0.1)    --affine_slope 1000    --data_path ./data/centered_IXI --train_dataset ixi --epochs 1 --visualize
 
-python scripts/run.py    --run_mode train    --num_keypoints 128    --loss_fn mse    --transform_type affine    --train_dataset ixi    --data_path ./data/centered_IXI    --max_random_affine_augment_params (0.2, 0.2, 3.1416, 0.1)    --load_path ./weights/numkey128_pretrain.2500.h5 --epochs 1
+python scripts/run.py    --run_mode train    --num_keypoints 128    --loss_fn mse    --transform_type affine    --train_dataset ixi    --data_path ./data/centered_IXI    --max_random_affine_augment_params (0.2, 0.2, 3.1416, 0.1)    --load_path ./weights/numkey128_pretrain.2500.h5 --epochs 10
 
 
 python scripts/run.py    --run_mode eval    --num_keypoints 512    --loss_fn dice    --transform_type tps_0    --train_dataset ixi --data_path ./data/centered_IXI    --load_path ./weights/numkey512_tps0_dice.4760.h5    --save_dir ./results
