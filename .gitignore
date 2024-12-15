@@ -11,3 +11,7 @@
 /data_za_naredit
 /poskus.py
 __pycache__
+/data_nasi
+*.nii
+*.nii.gz
+/trening
