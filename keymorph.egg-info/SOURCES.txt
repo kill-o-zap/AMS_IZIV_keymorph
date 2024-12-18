@@ -1,6 +1,13 @@
 LICENSE
 README.md
 setup.py
+functions/__init__.py
+functions/augmentation.py
+functions/cm_plotter.py
+functions/loader_maker.py
+functions/model.py
+functions/registration_tools.py
+functions/visualization.py
 keymorph/__init__.py
 keymorph/augmentation.py
 keymorph/keypoint_aligners.py
