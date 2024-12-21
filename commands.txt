@@ -21,3 +21,6 @@ spremenjeno train 54 vrstica, "seg" v "mask", zaradi tega ker nimamo segmentacij
 
 
 python scripts/run.py    --run_mode train    --num_keypoints 128   --loss_fn mse    --transform_type affine    --train_dataset ixi    --data_path ./processed_IXI    --max_random_affine_augment_params (0.2, 0.2, 3.1416, 0.1)    --load_path ./weights/numkey128_pretrain.2500.h5 --epochs 10 --visualize
+
+
+python scripts/run.py    --run_mode train    --num_keypoints 128   --loss_fn mse    --transform_type affine    --train_dataset ixi    --data_path ./processed_IXI     --epochs 3  --save_dir ./utez
