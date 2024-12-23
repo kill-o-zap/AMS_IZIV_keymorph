@@ -34,10 +34,47 @@ aggregated_results:
 ```
 
 ## Docker Information
- 
+Step 1: When the repository is in the correct folder, navigate to it and run the command to download the data.
 
+```bash
+wget https://cloud.imi.uni-luebeck.de/s/xQPEy4sDDnHsmNg/download/ThoraxCBCT_OncoRegRelease_06_12_23.zip
+unzip ThoraxCBCT_OncoRegRelease_06_12_23.zip
+rm -r __MACOSX/
+rm ThoraxCBCT_OncoRegRelease_06_12_23.zip
+```
+Step 2: Build and run docker image
+```bash
+docker build -t image-name -f Dockerfile .
+```
+
+```bash
+docker run -it --rm  -v ./AMS_IZIV_keymorph:/app/AMS_IZIV_keymorph -v ./Release_06_12_23:/app/Release_06_12_23 --runtime=nvidia image-name bash
+```
+Otherwise if this does not works the dockerfile needs to be changed to the following.
+```bash
+FROM nvcr.io/nvidia/pytorch:24.06-py3
+# PACKAGE INSTALATION
+RUN apt-get update
+RUN apt-get install -y tmux
+
+ENV PYTHONDONTWRITEBYTECODE=1
+```
+And then buuilding and running the immage
+```bash
+docker build -t image-name -f Dockerfile .
+```
+
+```bash
+docker run -it --rm  -v ./AMS_IZIV_keymorph:/app/AMS_IZIV_keymorph -v ./Release_06_12_23:/app/Release_06_12_23 --runtime=nvidia image-name bash
+```
+And then the dependacies once when in the container, installed in the following way:
+```bash
+pip install -e .
+```
+## PATHING
+For this command examples the paths are predetermined. If the paths are changed the commands might not work
 ## Data Preparation
-The only data preparation I did for this was to run the scrip data_preparation.py . By running it, a folder was created that is later used for training and validating of this method. Check input and output folders in data_preparation.py before running it. Example how to run `data_preparation.py`
+The only data preparation I did for this was to run the scrip data_preparation.py . By running it, a folder was created that is later used for training and validating of this method. Check input and output folders in data_preparation.py before running it. Mase as if the CT scans will be in the folder Realese_06_12_23. Example how to run `data_preparation.py`:
 ```bash
 python data_preparation.py
 ```
@@ -45,6 +82,7 @@ python data_preparation.py
 
 ## Train Commands
 To initiate traning I used the following command below. Important parameters for training are log_interval and epochs, because the model saves the checkpoints of training when epochs%log_interval == 0. To get the checkpoint needed for registration these two parameters should be taken into the account. If not defined the following happens -> epochs = 2000, log_interval = 25. Some of the parameters are also used for registration (test) later on so they need to be remembered. Command --save_dir will create a folder or point to one if it is already made and in it save checpoints, images if a --visualize command is enabled and json file of all arguments for this traning session. In --save_dir the map where it will be saved can be changed, but for this example commands they should stay as they are.
+The line "tio.Mask(masking_method="mask")," in hyperparameters.py must be uncommented for the command to work.
 Below is the example, how to run `train.py`:
 
 ```bash
@@ -53,10 +91,8 @@ python scripts/run.py    --run_mode train  --backbone unet --num_levels_for_unet
 
 
 ## Test Commands
-To test or register the moving and fixed image I used two commands below. It is important to register the pictures with the same num_keypoints, backbone, num_levels_for_unet (depends on the backbone), list_of_metrics has to be mse because for other scores I would need segmentations. Load paths depends on the save_dir of Train function.
-It has to me manualy replaced. For fixed and moving image you have to choose the correct ones. The register function needs to have validation images.
-
-
+To test or register the moving and fixed image I used two commands below. It is important to register the pictures with the same num_keypoints, backbone, num_levels_for_unet (depends on the backbone), list_of_metrics has to be mse because for other scores I would need segmentations. Load paths depends on the save_dir of Train function, because the weight is important.
+The line 7. tio.Mask(masking_method="mask"), in hyperparameters must be commented so that the commands can work.
 
 ```bash Command 1 T2 -> T1
 
@@ -74,7 +110,7 @@ python resize_koncni.py
 ```
 
 ## Evaluation
-For input the path to the input and output has to be changed. For input the path must be to the output of the function resize_koncni.py.
+For input the path to the input and output has to be changed. For input the path must be to the output of the function resize_koncni.py. Here the input and output commands must be properly addresed. 
 ```bash
 docker run --rm -u $UID:$UID -v ./input:/input -v ./output:/output/ gitlab.lst.fe.uni-lj.si:5050/domenp/deformable-registration python evaluation.py -v
 ```

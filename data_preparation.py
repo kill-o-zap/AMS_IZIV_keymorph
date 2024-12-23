@@ -74,8 +74,8 @@ def organize_files(input_image_folder, input_mask_folder):
 # Main execution flow
 if __name__ == "__main__":
     # Poti do map s slikami
-    input_image_folder = "ThoraxCBCT_OncoRegRelease_06_12_23/Release_06_12_23/imagesTr"
-    input_mask_folder = "ThoraxCBCT_OncoRegRelease_06_12_23/Release_06_12_23/masksTr"
+    input_image_folder = "Release_06_12_23/imagesTr"
+    input_mask_folder = "Release_06_12_23/masksTr"
 
     # Create output folder structure
     create_output_folders()
