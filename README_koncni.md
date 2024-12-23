@@ -3,7 +3,9 @@ Jernej Bončina
 
 Keymorph
 
-LINK TO YOUR PROJECT https://github.com/kill-o-zap/AMS_IZIV_keymorph.git
+Link to your project: https://github.com/kill-o-zap/AMS_IZIV_keymorph.git
+
+Original github repository: https://github.com/alanqrwang/keymorph.git
 
 ## Method Explanation
 KeyMorph is an unsupervised method for image registration that aligns two images by detecting and using keypoints. The process involves three main steps:
