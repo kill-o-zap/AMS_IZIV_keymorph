@@ -21,3 +21,4 @@ __pycache__
 utez_2/__training__keymorph_keypoints128_batch1_lr3e-06/checkpoints/epoch20_trained_model.pth.tar
 neki/__training__keymorph_keypoints128_batch1_lr3e-06/args.json
 utez_2/__training__keymorph_keypoints128_batch1_lr3e-06/args.json
+/figures
